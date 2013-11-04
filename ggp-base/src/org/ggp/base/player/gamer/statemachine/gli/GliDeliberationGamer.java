@@ -52,7 +52,7 @@ public final class GliDeliberationGamer extends StateMachineGamer
 	        int goal = theMachine.getGoal(state, getRole());
 	        if (goal > bestRes.x) {
 	        	res = new Pair <Integer, List<Move>>(goal, new ArrayList<Move>(prevMoves));
-		        System.out.println(System.currentTimeMillis() + " final bestRes:" + res.toString());
+		        //System.out.println(System.currentTimeMillis() + " final bestRes:" + res.toString());
 	        } else {
 	        	res = bestRes;
 	        }
@@ -60,7 +60,7 @@ public final class GliDeliberationGamer extends StateMachineGamer
 	    }
 
 		if(System.currentTimeMillis() > finishBy) {
-		    System.out.println(System.currentTimeMillis() + " timeout bestRes:" + bestRes.toString());
+		    //System.out.println(System.currentTimeMillis() + " timeout bestRes:" + bestRes.toString());
 			return bestRes;
 		}
 		
@@ -69,7 +69,7 @@ public final class GliDeliberationGamer extends StateMachineGamer
 		for (Move curMove : moves) { 
 			// the enemy has to choose 'noop', so we can use getRandomJointMove here
 			List<Move> jointMoves = theMachine.getRandomJointMove(state, getRole(), curMove);
-			System.out.println(System.currentTimeMillis() + " " + depth + " curMove:" + curMove.toString());
+			//System.out.println(System.currentTimeMillis() + " " + depth + " curMove:" + curMove.toString());
 			//System.out.println(System.currentTimeMillis() + " " + depth + " joint:" + jointMoves.toString());
 			MachineState nextState = theMachine.getNextState(state, jointMoves);
 			//System.out.println(System.currentTimeMillis() + " " + depth + " nextState:" + nextState.toString());
@@ -91,14 +91,14 @@ public final class GliDeliberationGamer extends StateMachineGamer
 	{
 		long finishBy = timeout - 1000;
 		//System.out.println("rules:\n"+ getMatch().getGame().getRules().toString());
-		System.out.println("state: " + getCurrentState().toString());
+		//System.out.println("state: " + getCurrentState().toString());
 		List<Move> moves = new ArrayList<Move>();
 		moves.add(getStateMachine().getLegalMoves(getCurrentState(), getRole()).get(0));
 		
 		Pair <Integer, List<Move>> acc0 = new Pair<Integer, List<Move>>(-1, moves);
 		Pair <Integer, List<Move>> best = findBest(acc0, new ArrayList<Move>(), getCurrentState(), finishBy, 0);
 		Move res = best.y.get(0);
-		System.out.println("return " + res.toString());
+		//System.out.println("return " + res.toString());
 		return res;
 	}
 	@Override
